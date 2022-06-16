@@ -20,13 +20,9 @@
     This target element must have an attribute <b>jspage-target</b>
     Links are any button or hyperlink or other elements containing <b>jspage</b> attribute. This attribute has the subpage url. See below example:
 
-</div>
-
-<div class="row row-cols-lg-2 row-cols-1">
-
-    <div class="col border">
+    <xmp class="prettyprint lang-html ">
         <nav>
-            <a jspage="subpages/page1.html" class="active">Page 1</a>
+            <a jspage="subpages/page1.html">Page 1</a>
             <a jspage="subpages/page2.html">Page 2</a>
             <a jspage="subpages/page3.html">Page 3</a>
         </nav>
@@ -34,19 +30,21 @@
             by clicking on each above links, it's url will be loaded
             into this element using "JQuery.load(url)" function.
         </div>
-    </div>
+    </xmp>
+</div>
+
+<div class="row row-cols-1">
+
     <div class="col border">
-        <xmp class="prettyprint lang-html ">
-    <nav>
-        <a jspage="subpages/page1.html">Page 1</a>
-        <a jspage="subpages/page2.html">Page 2</a>
-        <a jspage="subpages/page3.html">Page 3</a>
-    </nav>
-    <div jspage-target>
-        by clicking on each above links, it's url will be loaded
-        into this element using "JQuery.load(url)" function.
-    </div>
-        </xmp>
+        <nav>
+            <a jspage="subpages/page1.html" class="active btn ">Page 1</a>
+            <a jspage="subpages/page2.html" class="btn">Page 2</a>
+            <a jspage="subpages/page3.html" class="btn">Page 3</a>
+        </nav>
+        <div jspage-target>
+            by clicking on each above links, it's url will be loaded
+            into this element using "JQuery.load(url)" function.
+        </div>
     </div>
 
     <div class="col border">
