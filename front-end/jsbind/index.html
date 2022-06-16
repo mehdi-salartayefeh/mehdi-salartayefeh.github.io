@@ -61,13 +61,14 @@
 
 <div class="row row-cols-lg-2 row-cols-1">
     <div class="col border">
-        <label for="firstname" jsbind="text:firstname , style.color:colory, style.font-size: size">firstname</label>:
+        <label for="firstname">firstname</label>:
         <input id="firstname" value="salam">
+        <br/>Hello <span jsbind="text:firstname"></span>
     </div>
     <div class="col border">
         <xmp class="prettyprint lang-html text-wrap">
-            <label jsbind="text:firstname , style.color:colory, style.font-size: size">firstname</label>:
             <input id="firstname" value="salam">
+            Hello <span jsbind="text:firstname"></span>
         </xmp>
     </div>
 
