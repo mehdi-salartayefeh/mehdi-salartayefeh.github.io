@@ -53,4 +53,4 @@ into one variable from a url automatically. we can do like below example:
 * attribute <b>jspage-load-before</b> is a javascript which will be run before loading.
 
 
-<a href="https://mehdi-salartayefeh.github.io/front-end/jsbind/">See Demo</a>
+<a href="https://mehdi-salartayefeh.github.io/front-end/jspage/">See Demo</a>
