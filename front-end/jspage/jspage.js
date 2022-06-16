@@ -1,13 +1,13 @@
 /**
- * sspages: a tiny library for easy page navigation in a SPA (Single Page Application)
+ * jspages: a tiny library for easy page navigation in a SPA (Single Page Application)
  * version: beta
  * created by Mehdi Salartayefeh
  *
- * each navigation has an attribute named "sspage"
- * by clicking a navigation, add "active" class to it automatically and div by attribute "sspage-target" loaded
- * attribute "sspage-load-json" is url to load into a variable with name "sspage-load-json-var"
- * attribute "sspage-load-after" is a javascript which run by eval
- * attribute "sspage-load-before" is a javascript which run by eval
+ * each navigation has an attribute named "jspage"
+ * by clicking a navigation, add "active" class to it automatically and div by attribute "jspage-target" loaded
+ * attribute "jspage-load-json" is url to load into a variable with name "jspage-load-json-var"
+ * attribute "jspage-load-after" is a javascript which run by eval
+ * attribute "jspage-load-before" is a javascript which run by eval
  * page by address page
  * @version .2.1.1
  *
@@ -16,30 +16,30 @@
  * @fix Attach a delegated event handler
  */
 
-console.log('sspages.js loaded');
+console.log('jspages.js loaded');
 
 var lastPageMethod = function () {
 
 };
-var lastsspage = "";
-var sspageback = null;
-var sspage_group = {};
+var lastjspage = "";
+var jspageback = null;
+var jspage_group = {};
 
 
-var sspageinit = function (z) {
-    $(z).find("[sspage-load]").each(function (index) {
+var jspageinit = function (z) {
+    $(z).find("[jspage-load]").each(function (index) {
         var _thispage = $(this);
-        var url = _thispage.attr("sspage-load");
+        var url = _thispage.attr("jspage-load");
         _thispage.html("<u>Loading ...</u>");
 
-        var before = _thispage.attr("sspage-load-before");
+        var before = _thispage.attr("jspage-load-before");
         if(before){
             if(!window[before]()) return;
         }
 
-        //!window[sspage] means call function by name sspage
+        //!window[jspage] means call function by name jspage
         _thispage.load(url,function () {
-            var after = _thispage.attr("sspage-load-after");
+            var after = _thispage.attr("jspage-load-after");
             if(after){
                 try {
                     eval(after);
@@ -47,80 +47,80 @@ var sspageinit = function (z) {
                     console.error('z2',e);
                 }
             }
-            sspageinit(this);
+            jspageinit(this);
         })
     });
 
-    $(z).find("[sspage-load-json]").each(function (index) {
+    $(z).find("[jspage-load-json]").each(function (index) {
         var _thispage = $(this);
-        load_sspage(_thispage);
+        load_jspage(_thispage);
     });
 
 
-    if(z.sspageinited){
+    if(z.jspageinited){
         console.log('inited before..............')
         return;
     }
     // Attach a delegated event handler
-    $(z).on("click","[sspage]",function (event) {
-        console.log('new sspage click');
-        var sspage = $(this).attr("sspage");
-        var after = $(this).attr("sspage-load-after");
-        var group = $(this).attr("sspage-group");
-        sspageback = $(this).attr("sspage-back");
-        var before = $(this).attr("sspage-load-before");
+    $(z).on("click","[jspage]",function (event) {
+        console.log('new jspage click');
+        var jspage = $(this).attr("jspage");
+        var after = $(this).attr("jspage-load-after");
+        var group = $(this).attr("jspage-group");
+        jspageback = $(this).attr("jspage-back");
+        var before = $(this).attr("jspage-load-before");
         if(typeof before !== 'undefined'){
             if(window[before]())
-                show_sspage(sspage, after, null, group);
+                show_jspage(jspage, after, null, group);
         } else {
-            show_sspage(sspage, after, null, group);
+            show_jspage(jspage, after, null, group);
         }
-        lastsspage = sspage;
+        lastjspage = jspage;
         return false;
     });
 
-    z.sspageinited = true;
+    z.jspageinited = true;
 };
-sspageinit(document);
+jspageinit(document);
 
-var sspageLocked = false;
+var jspageLocked = false;
 
-function sspageLock() {
-    sspageLocked = true;
+function jspageLock() {
+    jspageLocked = true;
 }
 
-function sspageUnlock() {
-    sspageLocked = false;
+function jspageUnlock() {
+    jspageLocked = false;
 }
 
-const sspages_cache = {};
-function show_sspage(sspage, after, target, group) {
-    /*if(sspage===lastsspage){
+const jspages_cache = {};
+function show_jspage(jspage, after, target, group) {
+    /*if(jspage===lastjspage){
         return;
     }*/
 
-    if(sspageLocked){
-        console.warn('sspage is Locked');
+    if(jspageLocked){
+        console.warn('jspage is Locked');
         return;
     }
 
     if(group){
-        sspage_group[sspage] = group;
+        jspage_group[jspage] = group;
     } else {
-        group = sspage_group[sspage];
+        group = jspage_group[jspage];
     }
 
 
-    let sspagetarget = $(target || "[sspage-target]");
+    let jspagetarget = $(target || "[jspage-target]");
 
 
-    if(!sspage) sspage = localStorage.getItem("sspage");
+    if(!jspage) jspage = localStorage.getItem("jspage");
 
-    if(!sspage) return;
+    if(!jspage) return;
 
-    localStorage.setItem("sspage",sspage);
+    localStorage.setItem("jspage",jspage);
 
-    sspagetarget.html(/*"<u>Loading page "+(sspage || '')+" ...</u>"+*/
+    jspagetarget.html(/*"<u>Loading page "+(jspage || '')+" ...</u>"+*/
         `<div class="page-loader-wrapper" style='position: relative; z-index: inherit; height: 70vh'>
     <div class="loader">
             <div class="preloader">
@@ -136,9 +136,9 @@ function show_sspage(sspage, after, target, group) {
             <p>Please wait...</p>
         </div></div>`);
 
-    //!window[sspage] means call function by name sspage
-    sspagetarget.load(sspage,function () {
-        /*lastPageMethod = window[sspage];
+    //!window[jspage] means call function by name jspage
+    jspagetarget.load(jspage,function () {
+        /*lastPageMethod = window[jspage];
         if(lastPageMethod)
             lastPageMethod();
 
@@ -154,12 +154,12 @@ function show_sspage(sspage, after, target, group) {
             }
         }
 
-        sspageinit(this);
+        jspageinit(this);
     });
 
     //new method with cache
-    /*if(sspages_cache.hasOwnProperty(sspage)){
-        sspagetarget.html(sspages_cache[sspage]);
+    /*if(jspages_cache.hasOwnProperty(jspage)){
+        jspagetarget.html(jspages_cache[jspage]);
 
         if(after){
             try {
@@ -169,18 +169,18 @@ function show_sspage(sspage, after, target, group) {
             }
         }
 
-        sspageinit(this);
+        jspageinit(this);
     } else {
         $.ajax({
-            url: sspage,
+            url: jspage,
 //            async: !1,
             type: "get",
             cache: false,
             // dataType: "json",
             success: function (response) {
-                sspages_cache[sspage] = response;
+                jspages_cache[jspage] = response;
 
-                sspagetarget.html(response);
+                jspagetarget.html(response);
 
                 if (after) {
                     try {
@@ -190,7 +190,7 @@ function show_sspage(sspage, after, target, group) {
                     }
                 }
 
-                sspageinit(this);
+                jspageinit(this);
 
                 // swal.fire("IABT", "Voucher with id \"" + voucher_id + "\" imported successfully.", "success", {closeOnClickOutside: false});
             },
@@ -209,8 +209,8 @@ function show_sspage(sspage, after, target, group) {
     */
 
     //set active ss menu
-    $('[sspage].active').each(function () {
-        var thisgroup = $(this).attr("sspage-group");
+    $('[jspage].active').each(function () {
+        var thisgroup = $(this).attr("jspage-group");
         if(thisgroup) {
             if (group && thisgroup === group) {
                 $(this).removeClass("active");
@@ -221,7 +221,7 @@ function show_sspage(sspage, after, target, group) {
 
     });
 
-    $('[sspage="'+sspage+'"]').each(function () {
+    $('[jspage="'+jspage+'"]').each(function () {
         $(this).addClass("active");
     });
 
@@ -230,27 +230,27 @@ function show_sspage(sspage, after, target, group) {
     }
 }
 
-function load_sspage(_thispage, url, cb) {
+function load_jspage(_thispage, url, cb) {
     if(!url)
-        url = _thispage.attr("sspage-load-json");
+        url = _thispage.attr("jspage-load-json");
 
     //replace some url vars
-    if (url.includes('sspagesearch')) {
-        url = url.replace(/\[sspagesearch\.(\w+)\]/, function (match, p1) {
-            if (!localStorage.getItem("sspage")) return '';
-            return (new URLSearchParams(localStorage.getItem("sspage").split('?')[1])).get(p1) || '';
+    if (url.includes('jspagesearch')) {
+        url = url.replace(/\[jspagesearch\.(\w+)\]/, function (match, p1) {
+            if (!localStorage.getItem("jspage")) return '';
+            return (new URLSearchParams(localStorage.getItem("jspage").split('?')[1])).get(p1) || '';
         });
     }
 
-    var varname = _thispage.attr("sspage-load-json-var");
-    var before = _thispage.attr("sspage-load-before");
+    var varname = _thispage.attr("jspage-load-json-var");
+    var before = _thispage.attr("jspage-load-before");
     if(before){
         if(!window[before]()) return;
     }
     $.getJSON(url, function (json) {
         window[varname] = json;
 
-        var after = cb || _thispage.attr("sspage-load-after");
+        var after = cb || _thispage.attr("jspage-load-after");
         if (after) {
             try {
                 if(typeof after === 'function'){
@@ -265,9 +265,9 @@ function load_sspage(_thispage, url, cb) {
     });
 }
 
-window.show_sspage = show_sspage;
+window.show_jspage = show_jspage;
 
-show_sspage();
+show_jspage();
 
 
 //handle back button
@@ -281,10 +281,10 @@ window.addEventListener('popstate', function() {
         console.log('hash', window.location.hash)
         // return;
     }
-    if(sspageback){
+    if(jspageback){
         window.history.pushState({}, '');
-        show_sspage(sspageback);
-        sspageback = null;
+        show_jspage(jspageback);
+        jspageback = null;
     }
 })
 
