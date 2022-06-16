@@ -7,9 +7,9 @@ Links are any button or hyperlink or other elements containing <b>jspage</b> att
 
 ```html
 <nav>
-    <a jspage="/subpages/page1.html">Page 1</a>
-    <a jspage="/subpages/page2.html">Page 2</a>
-    <a jspage="/subpages/page3.html">Page 3</a>
+    <a jspage="subpages/page1.html">Page 1</a>
+    <a jspage="subpages/page2.html">Page 2</a>
+    <a jspage="subpages/page3.html">Page 3</a>
 </nav>
 <div jspage-target>
     by clicking on each above links, it's url will be loaded 
