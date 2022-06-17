@@ -1,0 +1,185 @@
+<html>
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <link href="jswizard.css" rel="stylesheet">
+    <script src="jswizard.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+
+    <script>
+        $(() => {
+            window.wizard = new jsWizard({
+                steps_selector: 'ol.steps',
+                body_selector: '.steps-body',
+                step_selector: '.step',
+                next_selector: 'a.next',
+                back_selector: 'a.back',
+                finish_selector: 'a.finish',
+                stepValidators: {
+                    2: function () {
+                        if(!document.querySelector('#firstName').validity.valid){
+                            document.querySelector('#messages').innerHTML = '<b>First Name</b>: '+ document.querySelector('#firstName').validationMessage;
+                            return false;//means dont go to next step
+                        } else {
+                            document.querySelector('#messages').innerHTML = '';
+                            return true;//important , means go to next step
+                        }
+                    }
+                },
+                finish: function (e){
+                    alert('Form can submit here');
+                    return false;
+                }
+            });
+        })
+    </script>
+</head>
+<body class="container py-4">
+<h1 align="center">
+    jsWizard v0.1 Demo
+</h1>
+<div class="my-5">
+    <b>jsWizard</b> is a tiny library for easy wizard navigation in a SPA.
+</div>
+<div class="row">
+    <aside class="col-sm-4">
+        <ol class="steps">
+            <li class="step active"><span>Step 1</span></li>
+            <li class="step"><span>Step 2</span></li>
+            <li class="step"><span>Finish</span></li>
+        </ol>
+    </aside>
+    <main class="col">
+        <form class="steps-body">
+            <fieldset class="step active">
+                <legend>Step 1</legend>
+                <div class="p-4 g-2">
+                    <label>First Name <input id="firstName" minlength="3" required></label>
+                    <label>Last Name <input id="lastName" required></label>
+                </div>
+                <footer class="text-center p-2">
+                    <a href="#" class="btn btn-primary next">Next <i class="bx bx-down-arrow-alt"></i></a>
+                </footer>
+            </fieldset>
+
+            <fieldset class="step">
+                <legend>Step 2</legend>
+                <div class="p-4 g-2">
+                    <label>Photo <input type="file"></label>
+                    <label>Phone <input type="tel"></label>
+                    <label>Address <textarea></textarea></label>
+                </div>
+                <footer class="text-center p-2">
+                    <a href="#" class="btn btn-outline-primary back"><i class="bx bx-up-arrow-alt"></i> Back</a>
+                    <a href="#" class="btn btn-primary next">Next <i class="bx bx-down-arrow-alt"></i></a>
+                </footer>
+            </fieldset>
+
+            <fieldset class="step">
+                <legend>Step 3</legend>
+                <div class="p-4 g-2">
+                    <label>Password <input type="password"></label>
+                    <label>Confirm <input type="password"></label>
+
+                </div>
+                <footer class="text-center p-2">
+                    <a href="#" class="btn btn-outline-primary back"><i class="bx bx-up-arrow-alt"></i> Back</a>
+                    <a href="#" class="btn btn-primary finish">Finish <i class="bx bx-down-arrow-alt"></i></a>
+                </footer>
+            </fieldset>
+
+
+            <footer class="text-small text-secondary bg-light" id="messages"></footer>
+        </form>
+    </main>
+</div>
+
+<h2>Html</h2>
+<xmp class="prettyprint lang-html overflow-auto border bg-light">
+    <!-- wizard navigation -->
+    <ol class="steps">
+        <li class="step active"><span>Step 1</span></li>
+        <li class="step"><span>Step 2</span></li>
+        <li class="step"><span>Finish</span></li>
+    </ol>
+
+    <!-- wizard body -->
+    <form class="steps-body">
+        <fieldset class="step active">
+            <legend>Step 1</legend>
+            <div class="p-4 g-2">
+                <label>First Name <input id="firstName" required></label>
+                <label>Last Name <input id="lastName" required></label>
+            </div>
+            <footer class="text-center p-2">
+                <a href="#" class="btn btn-primary next">Next <i class="bx bx-down-arrow-alt"></i></a>
+            </footer>
+        </fieldset>
+
+        <fieldset class="step">
+            <legend>Step 2</legend>
+            <div class="p-4 g-2">
+                <label>Photo <input type="file"></label>
+                <label>Phone <input type="tel"></label>
+                <label>Address <textarea></textarea></label>
+            </div>
+            <footer class="text-center p-2">
+                <a href="#" class="btn btn-outline-primary back"><i class="bx bx-up-arrow-alt"></i> Back</a>
+                <a href="#" class="btn btn-primary next">Next <i class="bx bx-down-arrow-alt"></i></a>
+            </footer>
+        </fieldset>
+
+        <fieldset class="step">
+            <legend>Step 3</legend>
+            <div class="p-4 g-2">
+                <label>Password <input type="password"></label>
+                <label>Confirm <input type="password"></label>
+
+            </div>
+            <footer class="text-center p-2">
+                <a href="#" class="btn btn-outline-primary back"><i class="bx bx-up-arrow-alt"></i> Back</a>
+                <a href="#" class="btn btn-primary finish">Finish <i class="bx bx-down-arrow-alt"></i></a>
+            </footer>
+        </fieldset>
+</xmp>
+
+<h2>JavaScript</h2>
+<xmp class="prettyprint lang-javascript overflow-auto border bg-light">
+    <script>
+        $(() => {
+            var wizard = new jsWizard({
+                steps_selector: 'ol.steps',
+                body_selector: '.steps-body',
+                step_selector: '.step',
+                next_selector: 'a.next',
+                back_selector: 'a.back',
+                finish_selector: 'a.finish',
+                stepValidators: {
+                    2: function () {
+                        if(!document.querySelector('#firstName').validity.valid){
+                            document.querySelector('#messages').innerHTML = '<b>First Name</b>: '+ document.querySelector('#firstName').validationMessage;
+                            return false;//means dont go to next step
+                        } else {
+                            return true;//important , means go to next step
+                        }
+                    }
+                },
+                finish: function (e){
+                    alert('Form can submit here')
+                }
+            });
+        })
+    </script>
+</xmp>
+
+
+</body>
+
+
+
+</html>

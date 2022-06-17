@@ -1,0 +1,86 @@
+
+/*.steps {
+    background-color: yellow;
+    padding: 4pc 3pc 3pc 5pc;
+}*/
+
+.steps > li {
+    margin-bottom: 1pc;
+}
+
+.steps > li.active {
+    color: navy;
+    font-weight: bold;
+}
+
+.steps > li .step {
+    /*font-size: larger;*/
+}
+
+.steps {
+    counter-reset:item;
+    margin:0;
+    padding-left:0;
+}
+.steps>li {
+    counter-increment:item;
+    list-style:none inside;
+    /*margin: 2pc 0;*/
+    overflow: hidden;
+    font-size: 16px !important;
+    line-height: 1.3;
+}
+.steps>li span{
+    margin-top: .5pc;
+    display: inline-block;
+}
+.steps>li:before {
+    content:counter(item) ;
+    margin-right: 20px;
+    padding: 3px;
+    display: block;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    border: 3px solid navy;
+    width: 40px;
+    height: 40px;
+    background: #fff;
+    color: navy;
+    text-align: center;
+    font: 25px 'Lato', Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    float: left;
+}
+.steps>li.active:before {
+    background-color: navy;
+    color: #fff;
+}
+
+
+
+fieldset{
+    margin-bottom: 1pc;
+    border: 3px solid navy;
+}
+
+fieldset legend{
+    background-color: #def6ff;
+    font-size: large;
+    font-weight: bold;
+    padding: 1pc;
+    color: navy;
+}
+
+fieldset legend > i{
+    font-size: x-large;
+    vertical-align: middle;
+    margin: 0 .5pc;
+}
+
+fieldset > strong {
+    margin: -1pc 0 1pc 0;
+    display: block;
+}
+
+
