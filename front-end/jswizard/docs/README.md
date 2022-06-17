@@ -1,5 +1,5 @@
 # jsWizard
-**jswizard** is a tiny library for easy wizard navigation in a SPA.
+**jsWizard** is a tiny library for easy wizard navigation in a SPA.
 
 ## HTML
 ```html
