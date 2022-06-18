@@ -1,4 +1,6 @@
 # Mehdi Salartayefeh
-> Hi to everybody, I am a programmer and have started programming since 2000.
+Hello everyone, I am a programmer and have been programming since 2000.
 
-My website is [mehdi.salartayefeh.ir](https://mehdi.salartayefeh.ir)
+You can see some of my repositories and portfolio in my Github account.
+
+> My personal website is [mehdi.salartayefeh.ir](https://mehdi.salartayefeh.ir). you can see my resume there.
